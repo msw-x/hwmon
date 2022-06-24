@@ -21,7 +21,7 @@
       }
     ]
   },
-  "editable": true,
+  "editable": false,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
   "id": 1,
@@ -272,7 +272,7 @@
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 16,
+            "fillOpacity": 24,
             "gradientMode": "none",
             "hideFrom": {
               "legend": false,
@@ -342,7 +342,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "editorMode": "code",
-          "expr": "100 - (avg by (cpu) (irate(node_cpu_seconds_total{mode=\"idle\"}[1m])) * 100)",
+          "expr": "100 - (avg by () (irate(node_cpu_seconds_total{mode=\"idle\"}[1m])) * 100)",
           "legendFormat": "{{cpu}}",
           "range": true,
           "refId": "A"
