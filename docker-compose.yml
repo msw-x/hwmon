@@ -3,6 +3,9 @@ version: '3'
 networks:
   monitor-net:
     driver: bridge
+  host:
+    name: host
+    external: true
 
 volumes:
     prometheus_data: {}
@@ -28,6 +31,7 @@ services:
       - 9090
     networks:
       - monitor-net
+      - host
 
   nodeexporter:
     image: prom/node-exporter:latest
