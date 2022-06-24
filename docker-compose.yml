@@ -4,6 +4,7 @@ networks:
   monitor-net:
     driver: bridge
   host-net:
+    name: host
     external: true
 
 volumes:
