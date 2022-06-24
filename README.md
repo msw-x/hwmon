@@ -8,8 +8,13 @@ docker-compose ps
 docker-compose down
 docker-compose down --volumes
 
+docker ps -a
 docker ps --size
 docker system df
+docker images
+docker image rm NAME
+docker container ls -a
+docker container rm ID/NAME
 
 
 sudo apt install sysbench
