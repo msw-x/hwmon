@@ -24,7 +24,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 14,
+  "id": 1,
   "links": [],
   "liveNow": true,
   "panels": [
@@ -103,7 +103,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "light-blue",
+                "color": "super-light-green",
                 "value": null
               }
             ]
@@ -831,18 +831,17 @@
         "type": "prometheus",
         "uid": "PBFA97CFB590B2093"
       },
-      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "palette-classic"
           },
           "custom": {
-            "axisLabel": "",
+            "axisLabel": "write (-) / read (+)",
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 20,
+            "fillOpacity": 18,
             "gradientMode": "none",
             "hideFrom": {
               "legend": false,
@@ -878,7 +877,8 @@
                 "value": 80
               }
             ]
-          }
+          },
+          "unit": "Bps"
         },
         "overrides": []
       },
@@ -888,7 +888,7 @@
         "x": 12,
         "y": 8
       },
-      "id": 26,
+      "id": 28,
       "options": {
         "legend": {
           "calcs": [],
@@ -907,13 +907,25 @@
             "uid": "PBFA97CFB590B2093"
           },
           "editorMode": "code",
-          "expr": "node_netstat_Tcp_CurrEstab",
-          "legendFormat": "ESTABLISHED",
+          "expr": "rate(node_disk_read_bytes_total[$__rate_interval])",
+          "legendFormat": "{{device}} read",
           "range": true,
           "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "editorMode": "code",
+          "expr": "-rate(node_disk_written_bytes_total[$__rate_interval])",
+          "hide": false,
+          "legendFormat": "{{device}} write",
+          "range": true,
+          "refId": "B"
         }
       ],
-      "title": "TCP",
+      "title": "Disks I/O",
       "type": "timeseries"
     },
     {
@@ -1165,17 +1177,18 @@
         "type": "prometheus",
         "uid": "PBFA97CFB590B2093"
       },
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "palette-classic"
           },
           "custom": {
-            "axisLabel": "write (-) / read (+)",
+            "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 18,
+            "fillOpacity": 20,
             "gradientMode": "none",
             "hideFrom": {
               "legend": false,
@@ -1212,7 +1225,7 @@
               }
             ]
           },
-          "unit": "Bps"
+          "unit": "decbytes"
         },
         "overrides": []
       },
@@ -1222,7 +1235,7 @@
         "x": 12,
         "y": 16
       },
-      "id": 28,
+      "id": 26,
       "options": {
         "legend": {
           "calcs": [],
@@ -1241,25 +1254,13 @@
             "uid": "PBFA97CFB590B2093"
           },
           "editorMode": "code",
-          "expr": "rate(node_disk_read_bytes_total[$__rate_interval])",
-          "legendFormat": "{{device}} read",
+          "expr": "node_filesystem_size_bytes{fstype=~\"ext.*|xfs\",mountpoint !~\".*pod.*\",device!~'rootfs'} - node_filesystem_avail_bytes{fstype=~\"ext.*|xfs\",mountpoint !~\".*pod.*\",device!~'rootfs'}",
+          "legendFormat": "{{device}}",
           "range": true,
           "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
-          },
-          "editorMode": "code",
-          "expr": "-rate(node_disk_written_bytes_total[$__rate_interval])",
-          "hide": false,
-          "legendFormat": "{{device}} write",
-          "range": true,
-          "refId": "B"
         }
       ],
-      "title": "Disk",
+      "title": "Disks usage",
       "type": "timeseries"
     }
   ],
@@ -1286,6 +1287,6 @@
   "timezone": "",
   "title": "HW SysMon",
   "uid": "03vKTO37z",
-  "version": 33,
+  "version": 3,
   "weekStart": ""
 }
