@@ -4,8 +4,7 @@ networks:
   monitor-net:
     driver: bridge
   host-net:
-    name: host
-    external: true
+    driver: host
 
 volumes:
     prometheus_data: {}
