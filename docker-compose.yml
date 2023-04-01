@@ -19,6 +19,7 @@ services:
       - '--web.console.templates=/etc/prometheus/consoles'
       - '--storage.tsdb.retention.time=600h'
       - '--web.enable-lifecycle'
+      - '--web.listen-address=127.0.0.1:9090'
     restart: unless-stopped
     network_mode: host
 
