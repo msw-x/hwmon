@@ -1,22 +1,14 @@
-sudo apt install docker-compose
-sudo usermod -a -G docker $USER
+# Hardware monigoring (grafana + prometheus + nodeexporter)
 
-git clone git://mswo.ru/msw/hwmon
-
-docker-compose up --detach
+usage:
+```
+docker-compose up --d
 docker-compose ps
 docker-compose down
-docker-compose down --volumes
-
-docker ps -a
-docker ps --size
-docker system df
-docker images
-docker image rm NAME
-docker container ls -a
-docker container rm ID/NAME
-
-
+docker-compose down --v
+```
+testing:
+```
 sudo apt install sysbench
 [cpu]
 sysbench --num-threads=8 --test=cpu --cpu-max-prime=10000000 run
@@ -32,3 +24,4 @@ iperf3 -c iperf.biznetnetworks.com -f M -t 30
 
 dd if=/dev/zero of=/tmp/zero bs=1G count=24
 stress-ng --vm-bytes $(awk '/MemAvailable/{printf "%d\n", $2 * 0.9;}' < /proc/meminfo)k --vm-keep -m 1
+```
