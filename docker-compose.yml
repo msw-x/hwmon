@@ -20,8 +20,8 @@ services:
       - '--storage.tsdb.retention.time=600h'
       - '--web.enable-lifecycle'
     restart: unless-stopped
-    ports:
-      - "127.0.0.1:9090:9090"
+    expose:
+      - "127.0.0.1:9090"
     network_mode: host
 
   nodeexporter:
@@ -36,8 +36,8 @@ services:
       - '--path.procfs=/host/proc'
       - '--path.sysfs=/host/sys'
     restart: unless-stopped
-    ports:
-      - "127.0.0.1:9100:9100"
+    expose:
+      - "127.0.0.1:9100"
     network_mode: host
 
   grafana:
@@ -52,6 +52,6 @@ services:
       - GF_SECURITY_ADMIN_PASSWORD=${ADMIN_PASSWORD:-goodlife}
       - GF_USERS_ALLOW_SIGN_UP=false
     restart: unless-stopped
-    ports:
-      - "3000:3000"
+    expose:
+      - "3000"
     network_mode: host
