@@ -52,6 +52,6 @@ services:
       - GF_SECURITY_ADMIN_PASSWORD=${ADMIN_PASSWORD:-goodlife}
       - GF_USERS_ALLOW_SIGN_UP=false
     restart: unless-stopped
-    expose:
-      - "3000"
+    #expose:
+      #- "3000"
     network_mode: host
