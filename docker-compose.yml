@@ -26,13 +26,9 @@ services:
     image: prom/node-exporter:latest
     container_name: nodeexporter
     volumes:
-      - /proc:/host/proc:ro
-      - /sys:/host/sys:ro
-      - /:/rootfs:ro,rslave
+      - /:/host:ro,rslave
     command:
-      - '--path.rootfs=/rootfs'
-      - '--path.procfs=/host/proc'
-      - '--path.sysfs=/host/sys'
+      - '--path.rootfs=/host'
       - '--web.listen-address=127.0.0.1:9100'
     restart: unless-stopped
     network_mode: host
