@@ -25,3 +25,8 @@ iperf3 -c iperf.biznetnetworks.com -f M -t 30
 dd if=/dev/zero of=/tmp/zero bs=1G count=24
 stress-ng --vm-bytes $(awk '/MemAvailable/{printf "%d\n", $2 * 0.9;}' < /proc/meminfo)k --vm-keep -m 1
 ```
+build:
+```
+docker build -f docker/Dockerfile.grafana -t grafana .
+docker build -f docker/Dockerfile.prometheus -t prometheus .
+```
